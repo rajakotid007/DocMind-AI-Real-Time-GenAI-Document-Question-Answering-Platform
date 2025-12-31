@@ -1,45 +1,103 @@
-# 🦜️🔗 Chat LangChain
+# 🤖 DocMind AI — GenAI Document Question Answering Platform
 
-This repo is an implementation of a chatbot specifically focused on question answering over the [LangChain documentation](https://python.langchain.com/).
-Built with [LangChain](https://github.com/langchain-ai/langchain/), [LangGraph](https://github.com/langchain-ai/langgraph/), and [Next.js](https://nextjs.org).
+DocMind AI is a **Generative AI application** designed to answer user questions over large technical documentation using **Retrieval-Augmented Generation (RAG)**.
 
-Deployed version: [chat.langchain.com](https://chat.langchain.com)
+The system combines **large language models**, **vector search**, and **real-time streaming** to deliver accurate, context-aware answers over structured and unstructured documents.
 
-> Looking for the JS version? Click [here](https://github.com/langchain-ai/chat-langchainjs).
+---
 
-The app leverages LangChain and LangGraph's streaming support and async API to update the page in real time for multiple users.
+## 🔍 Overview
 
-## Running locally
+DocMind AI enables users to interact with documentation in natural language.  
+Instead of keyword search, the platform retrieves relevant context using semantic similarity and generates responses using an LLM.
 
-This project is now deployed using [LangGraph Cloud](https://langchain-ai.github.io/langgraph/cloud/), which means you won't be able to run it locally (or without a LangGraph Cloud account). If you want to run it WITHOUT LangGraph Cloud, please use the code and documentation from this [branch](https://github.com/langchain-ai/chat-langchain/tree/langserve).
+This architecture mirrors how **enterprise GenAI systems** are built for internal knowledge bases, developer documentation, and customer support platforms.
 
-> [!NOTE]
-> This [branch](https://github.com/langchain-ai/chat-langchain/tree/langserve) **does not** have the same set of features.
+---
 
-## 📚 Technical description
+## 🧠 Key Capabilities
 
-There are two components: ingestion and question-answering.
+- Question answering over large document collections
+- Retrieval-Augmented Generation (RAG)
+- Semantic search using vector embeddings
+- Real-time streaming responses
+- Multi-user session support
+- Observability and feedback collection
+- Production-ready architecture patterns
 
-Ingestion has the following steps:
+---
 
-1. Pull html from documentation site as well as the Github Codebase
-2. Load html with LangChain's [RecursiveURLLoader](https://python.langchain.com/docs/integrations/document_loaders/recursive_url) and [SitemapLoader](https://python.langchain.com/docs/integrations/document_loaders/sitemap)
-3. Split documents with LangChain's [RecursiveCharacterTextSplitter](https://python.langchain.com/api_reference/text_splitters/character/langchain_text_splitters.character.RecursiveCharacterTextSplitter.html)
-4. Create a vectorstore of embeddings, using LangChain's [Weaviate vectorstore wrapper](https://python.langchain.com/docs/integrations/vectorstores/weaviate) (with OpenAI's embeddings).
+## 🏗️ System Architecture
 
-Question-Answering has the following steps:
+The application is composed of two core pipelines:
 
-1. Given the chat history and new user input, determine what a standalone question would be using an LLM.
-2. Given that standalone question, look up relevant documents from the vectorstore.
-3. Pass the standalone question and relevant documents to the model to generate and stream the final answer.
-4. Generate a trace URL for the current chat session, as well as the endpoint to collect feedback.
+### 1️⃣ Document Ingestion Pipeline
+- Fetches documentation and source content from web pages and repositories
+- Loads content using recursive and sitemap-based loaders
+- Splits documents into semantically meaningful chunks
+- Generates vector embeddings for efficient similarity search
+- Stores embeddings in a vector database
 
-## Documentation
+### 2️⃣ Question Answering Pipeline
+- Converts user input into a standalone question using an LLM
+- Retrieves relevant document chunks via vector similarity
+- Generates grounded answers using retrieved context
+- Streams responses in real time
+- Captures session traces and user feedback
 
-Looking to use or modify this Use Case Accelerant for your own needs? We've added a few docs to aid with this:
+---
 
-- **[Concepts](./CONCEPTS.md)**: A conceptual overview of the different components of Chat LangChain. Goes over features like ingestion, vector stores, query analysis, etc.
-- **[Modify](./MODIFY.md)**: A guide on how to modify Chat LangChain for your own needs. Covers the frontend, backend and everything in between.
-- **[LangSmith](./LANGSMITH.md)**: A guide on adding robustness to your application using LangSmith. Covers observability, evaluations, and feedback.
-- **[Production](./PRODUCTION.md)**: Documentation on preparing your application for production usage. Explains different security considerations, and more.
-- **[Deployment](./DEPLOYMENT.md)**: How to deploy your application to production. Covers setting up production databases, deploying the frontend, and more.
+## 🛠 Tech Stack
+
+- Python
+- LangChain
+- LangGraph
+- Large Language Models (LLMs)
+- Vector Databases (Weaviate / FAISS / Chroma)
+- Embeddings
+- Next.js (Frontend)
+- Streaming APIs
+
+---
+
+## 🚀 Running the Application
+
+This project is designed to run in a **cloud-based GenAI environment** that supports streaming and async execution.
+
+For local experimentation or simplified setups, a reduced-feature branch can be used that replaces managed services with local components.
+
+> Note: Feature availability may differ between cloud and local execution modes.
+
+---
+
+## 📚 Documentation
+
+Additional guides are included to help understand and extend the system:
+
+- **Concepts** — High-level overview of ingestion, retrieval, and generation
+- **Customization Guide** — How to adapt the system for your own documents
+- **Observability** — Monitoring, tracing, and evaluation strategies
+- **Production Readiness** — Security, scaling, and deployment considerations
+- **Deployment** — Frontend and backend deployment patterns
+
+---
+
+## 🎯 Use Cases
+
+- Internal company documentation chatbots
+- Developer documentation assistants
+- Knowledge base search systems
+- Customer support automation
+- Enterprise AI copilots
+
+---
+
+## 📌 Interview Summary
+
+> DocMind AI is a RAG-based Generative AI platform that answers questions over large documentation sets by combining vector search with large language models and real-time streaming responses.
+
+---
+
+## 📄 License
+
+This project is released under an open-source license and is intended for educational and professional use.
